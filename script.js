@@ -87,9 +87,9 @@ var upperCasedCharacters = [
   'Y',
   'Z'
 ];
+var bigArray = [];
+var bigArrayLength = 0;
 
-const startArray =[""];
-const PasswordArray =[""];
 let choiceSpecial = true;
 let choiceNumeric = true;
 let choiceLower = true;
@@ -100,36 +100,25 @@ function getPasswordOptions() {
   choiceNumeric=confirm("Should I include Numeric Characters?");
   choiceLower=confirm("Should I include Lower Cased Characters?");
   choiceUpper=confirm("Should I include Upper Cased Characters?");
-  //let PasswordArray = startArray.concat(specialCharacters);
-    console.log(choiceSpecial);
-    console.log(choiceNumeric);
-    console.log(choiceLower);
-    console.log(choiceUpper);
   return choiceSpecial,choiceNumeric,choiceLower,choiceUpper
 };
   
-  // if 
-  // console.log(a)
-  //   {
-  // // PassLength = 1*prompt("Enter Length (10-64):");
-  // options.specialCharacters = confirm("Should I include Special Characters?");
-  // options.numericCharacters = confirm("Should I include Numeric Characters?");
-  // options.lowerCasedCharacters = confirm("Should I include Lower Cased Characters?");
-  // options.upperCasedCharacters = confirm("Should I include Upper Cased Characters?");
-  // }
-  // console.log(prompt("Should I include Special Characters?"));
-  // options.numericCharacters = prompt("Should I include numeric Characters?");
-//   return 
-// }
-
+ 
 // Function for getting a random element from an array
 function getRandom(arr) {
 }
 
 // Function to generate password with user input
-function generatePassword() {
-
-return "dsonbor234252n"
+function generatePassword(tempPassword,randomIndex)
+ {
+  
+  for (let i = 0; i < PassLength; i++)
+  {
+      let randomIndex = Math.floor(Math.random()*bigArray.length);
+      console.log(bigArray[randomIndex]);
+      var tempPassword = tempPassword.concat(bigArray[randomIndex]);
+    }
+  return tempPassword
 }
 
 // Get references to the #generate element
@@ -138,35 +127,52 @@ var generateBtn = document.querySelector('#generate');
 // Write password to the #password input
 function writePassword() {
   // console.log(specialCharacters);
-  var password = generatePassword();
+  var tempPassword = "";
+  var randomIndex = 0
+  var password = generatePassword(tempPassword,randomIndex);
   var passwordText = document.querySelector('#password');
 
   passwordText.value = password;
 }
-
+// password length determination
 function PassLengthInput(){
   PassLength = 1*prompt("Enter Length (10-64):");
  return PassLength
 }
-
-
-let PassLength = 0;
+// body of the script-----
+let PassLength = 0
 while (PassLength < 10 || PassLength >64)
   {
-    PassLengthInput();
+    PassLengthInput(); 
     if (PassLength < 10 || PassLength >64) {
       alert("Please enter Number between 10 to 64")
     };
     console.log(PassLength);
   }
-// let allChoices=!(choiceSpecial || choiceNumeric || choiceLower || choiceUpper);
+//getting password option  
 do   
   {
     getPasswordOptions();
    // checking if at least one type was chosen
     if (!(choiceSpecial || choiceNumeric || choiceLower || choiceUpper)) {
       alert("Next time, please choose at least one character type for Password generation");
-      };
+      } else {
+        if (choiceSpecial) 
+            { var bigArray = bigArray.concat(specialCharacters);
+          };
+        if (choiceNumeric) 
+          { var bigArray = bigArray.concat(numericCharacters);
+        };
+        if (choiceLower) 
+          { var bigArray = bigArray.concat(lowerCasedCharacters);
+        };
+        if (choiceUpper) 
+          { var bigArray = bigArray.concat(upperCasedCharacters);
+        };
+        console.log(bigArray);
+        bigArrayLength=bigArray.length;
+        console.log(bigArrayLength);
+      }
     
     }
 while (!(choiceSpecial || choiceNumeric || choiceLower || choiceUpper));
@@ -198,3 +204,16 @@ writePassword()
 // let randomIndex = Math.floor(Math.random()*arrayName.length)
 // 5:59
 // bigArray = bigArray.concat(exampleArray)
+ // if 
+  // console.log(a)
+  //   {
+  // // PassLength = 1*prompt("Enter Length (10-64):");
+  // options.specialCharacters = confirm("Should I include Special Characters?");
+  // options.numericCharacters = confirm("Should I include Numeric Characters?");
+  // options.lowerCasedCharacters = confirm("Should I include Lower Cased Characters?");
+  // options.upperCasedCharacters = confirm("Should I include Upper Cased Characters?");
+  // }
+  // console.log(prompt("Should I include Special Characters?"));
+  // options.numericCharacters = prompt("Should I include numeric Characters?");
+//   return 
+// }
