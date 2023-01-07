@@ -96,22 +96,57 @@ let choiceLower = true;
 let choiceUpper = true;
 // Function to prompt user for password options
 function getPasswordOptions() {
+  do   
+  {
   choiceSpecial=confirm("Should I include Special Characters?");
   choiceNumeric=confirm("Should I include Numeric Characters?");
   choiceLower=confirm("Should I include Lower Cased Characters?");
   choiceUpper=confirm("Should I include Upper Cased Characters?");
-  return choiceSpecial,choiceNumeric,choiceLower,choiceUpper
+     // checking if at least one type was chosen
+    if (!(choiceSpecial || choiceNumeric || choiceLower || choiceUpper)) 
+      {
+      alert("Next time, please choose at least one character type for Password generation");
+      } else 
+        {
+        if (choiceSpecial) 
+            { bigArray = bigArray.concat(specialCharacters);
+          };
+        if (choiceNumeric) 
+          { bigArray = bigArray.concat(numericCharacters);
+        };
+        if (choiceLower) 
+          { bigArray = bigArray.concat(lowerCasedCharacters);
+        };
+        if (choiceUpper) 
+          { bigArray = bigArray.concat(upperCasedCharacters);
+        };
+        console.log(bigArray);
+        bigArrayLength=bigArray.length;
+        console.log(bigArrayLength);
+        }
+  }
+while (!(choiceSpecial || choiceNumeric || choiceLower || choiceUpper));
+  return
 };
   
- 
 // Function for getting a random element from an array
-function getRandom(arr) {
+function rearrangeSample(arr) {
+  let exchangeCharacter = "";
+  console.log(bigArray);
+  for (let i = 0; i < bigArrayLength; i++)
+    {
+      let randomIndex = Math.floor(Math.random()*bigArray.length);
+      exchangeCharacter = bigArray[i];
+      bigArray[i] = bigArray[randomIndex];
+      bigArray[randomIndex] = exchangeCharacter;      
+    }
+    console.log("after change "+bigArray);
+  return
 }
 
 // Function to generate password with user input
 function generatePassword(tempPassword,randomIndex)
  {
-  
   for (let i = 0; i < PassLength; i++)
   {
       let randomIndex = Math.floor(Math.random()*bigArray.length);
@@ -128,7 +163,7 @@ var generateBtn = document.querySelector('#generate');
 function writePassword() {
   // console.log(specialCharacters);
   var tempPassword = "";
-  var randomIndex = 0
+  var randomIndex = 0;
   var password = generatePassword(tempPassword,randomIndex);
   var passwordText = document.querySelector('#password');
 
@@ -149,71 +184,10 @@ while (PassLength < 10 || PassLength >64)
     };
     console.log(PassLength);
   }
-//getting password option  
-do   
-  {
-    getPasswordOptions();
-   // checking if at least one type was chosen
-    if (!(choiceSpecial || choiceNumeric || choiceLower || choiceUpper)) {
-      alert("Next time, please choose at least one character type for Password generation");
-      } else {
-        if (choiceSpecial) 
-            { var bigArray = bigArray.concat(specialCharacters);
-          };
-        if (choiceNumeric) 
-          { var bigArray = bigArray.concat(numericCharacters);
-        };
-        if (choiceLower) 
-          { var bigArray = bigArray.concat(lowerCasedCharacters);
-        };
-        if (choiceUpper) 
-          { var bigArray = bigArray.concat(upperCasedCharacters);
-        };
-        console.log(bigArray);
-        bigArrayLength=bigArray.length;
-        console.log(bigArrayLength);
-      }
-    
-    }
-while (!(choiceSpecial || choiceNumeric || choiceLower || choiceUpper));
-    // console.log(PassLength);
 
+  //getting password option  
+getPasswordOptions()
+  // rearrange array/sample
+rearrangeSample(bigArray)
 writePassword()
-      // allChoices = true;
-      // } else {
-      //   break;
- // console.log("choiceSpecial"+choiceSpecial);
-    // console.log("choiceNumeric"+choiceNumeric);
-    // console.log("choiceLower"+choiceLower);
-    // console.log("choiceUpper"+choiceUpper);
-    // let allChoices=!(choiceSpecial || choiceNumeric || choiceLower || choiceUpper);
-    // console.log("all results "+allChoices);
-// let Add event listener to generate button generateBtn.addEventListener('click', writePassword);
-
-// let practicePassword = "";
-//   for (let i = 0; i < 100; i++) {
     
-//     practicePassword += "j"
-    
-//   }
-
-
-
-//   return practicePassword;
-// 5:59
-// let randomIndex = Math.floor(Math.random()*arrayName.length)
-// 5:59
-// bigArray = bigArray.concat(exampleArray)
- // if 
-  // console.log(a)
-  //   {
-  // // PassLength = 1*prompt("Enter Length (10-64):");
-  // options.specialCharacters = confirm("Should I include Special Characters?");
-  // options.numericCharacters = confirm("Should I include Numeric Characters?");
-  // options.lowerCasedCharacters = confirm("Should I include Lower Cased Characters?");
-  // options.upperCasedCharacters = confirm("Should I include Upper Cased Characters?");
-  // }
-  // console.log(prompt("Should I include Special Characters?"));
-  // options.numericCharacters = prompt("Should I include numeric Characters?");
-//   return 
-// }
