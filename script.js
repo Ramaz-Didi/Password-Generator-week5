@@ -90,12 +90,13 @@ var upperCasedCharacters = [
 var bigArray = [];
 var bigArrayLength = 0;
 
-let choiceSpecial = true;
-let choiceNumeric = true;
-let choiceLower = true;
-let choiceUpper = true;
+
 // Function to prompt user for password options
 function getPasswordOptions() {
+  let choiceSpecial = true;
+  let choiceNumeric = true;
+  let choiceLower = true;
+  let choiceUpper = true;
   do   
   {
   choiceSpecial=confirm("Should I include Special Characters?");
@@ -122,17 +123,15 @@ function getPasswordOptions() {
         };
         console.log(bigArray);
         bigArrayLength=bigArray.length;
-        console.log(bigArrayLength);
         }
   }
 while (!(choiceSpecial || choiceNumeric || choiceLower || choiceUpper));
   return
 };
-  
 // Function for getting a random element from an array
 function rearrangeSample(arr) {
   let exchangeCharacter = "";
-  console.log(bigArray);
+  console.log("original Array "+bigArray);
   for (let i = 0; i < bigArrayLength; i++)
     {
       let randomIndex = Math.floor(Math.random()*bigArray.length);
@@ -140,7 +139,7 @@ function rearrangeSample(arr) {
       bigArray[i] = bigArray[randomIndex];
       bigArray[randomIndex] = exchangeCharacter;      
     }
-    console.log("after change "+bigArray);
+    console.log("after rearranging "+bigArray);
   return
 }
 
@@ -161,12 +160,12 @@ var generateBtn = document.querySelector('#generate');
 
 // Write password to the #password input
 function writePassword() {
-  // console.log(specialCharacters);
+
   var tempPassword = "";
   var randomIndex = 0;
   var password = generatePassword(tempPassword,randomIndex);
   var passwordText = document.querySelector('#password');
-
+  console.log(password);
   passwordText.value = password;
 }
 // password length determination
@@ -182,12 +181,13 @@ while (PassLength < 10 || PassLength >64)
     if (PassLength < 10 || PassLength >64) {
       alert("Please enter Number between 10 to 64")
     };
-    console.log(PassLength);
   }
-
   //getting password option  
-getPasswordOptions()
-  // rearrange array/sample
-rearrangeSample(bigArray)
-writePassword()
-    
+getPasswordOptions();
+  //rearrange array/sample
+rearrangeSample(bigArray);
+  //reissue new password 
+generateBtn.addEventListener("click", function(e) {
+  writePassword();
+});
+  
